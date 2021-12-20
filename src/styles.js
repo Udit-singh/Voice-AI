@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   footer: {
     textAlign: 'center',
-    position: 'fixed',
     left: 0,
     bottom: 0,
     color: 'black',
@@ -65,10 +64,11 @@ export default makeStyles((theme) => ({
     },
   },
   alanLogo: {
-    height: '27vmin',
-    borderRadius: '15%',
+    height: '30vmin',
+    borderRadius: '7%',
     padding: '0 5%',
     margin: '3% 0',
+    width: '60%',
     [theme.breakpoints.down('sm')]: {
       height: '35vmin',
     },
