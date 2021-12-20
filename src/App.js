@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import wordsToNumbers from 'words-to-numbers';
 import alanBtn from '@alan-ai/alan-sdk-web';
-import { NewsCards } from './components';
+
+import logo from './logo.jpeg';
+import { NewsCards, Modal } from './components';
 import useStyles from './styles';
 
 const App = () => {
@@ -21,7 +23,11 @@ const App = () => {
           setActiveArticle(-1);
         } else if (command === 'instructions') {
           setIsOpen(true);
-        } else if (command === 'highlight') {
+        } else if (command === 'weather') {
+          window.open("https://udit-singh-weatheronmars.netlify.app/", '_blank');
+          alanBtn().playText('Opening a detail page, please wait...');
+        }  
+        else if (command === 'highlight') {
           setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
         } else if (command === 'open') {
           const parsedNumber = number.length > 2 ? wordsToNumbers((number), { fuzzy: true }) : number;
@@ -42,23 +48,24 @@ const App = () => {
 
   return (
     <div>
-      <div>
+      <div className={classes.logoContainer}>
         {newsArticles.length ? (
           <div className={classes.infoContainer}>
             <div className={classes.card}><Typography variant="h5" component="h2">Try saying: <br /><br />Open article number [4]</Typography></div>
             <div className={classes.card}><Typography variant="h5" component="h2">Try saying: <br /><br />Go back</Typography></div>
           </div>
         ) : null}
-        <img src="https://alan.app/voice/images/previews/preview.jpg" className={classes.alanLogo} alt="logo" />
+        <img src={logo} className={classes.alanLogo} alt="logo" />
       </div>
       <NewsCards articles={newsArticles} activeArticle={activeArticle} />
-      {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       {!newsArticles.length ? (
         <div className={classes.footer}>
-          <Typography variant="body1" component="h2">
-            Developer
-            <a className={classes.link} href="https://www.linkedin.com/in/udit_singh1/"> Udit Singh</a> -
+          <Typography variant="body1" component="h1">
+            Developer: 
+            <a className={classes.link} href="https://www.linkedin.com/in/udit_singh1/">Udit Singh</a> -
           </Typography>
+          <img className={classes.image} src={logo} height="30px" alt="logo" />
         </div>
       ) : null}
     </div>
